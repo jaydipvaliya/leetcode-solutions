@@ -1,0 +1,27 @@
+// Last updated: 6/5/2026, 2:01:05 PM
+class Solution {
+public:
+   string convert(string s, int numRows) {
+    if (numRows == 1 || numRows >= (int)s.length()) {
+        return s;
+    }
+
+    vector<string> rows(numRows);
+    int currentRow = 0;
+    bool goingDown = false;
+
+    for (char c : s) {
+        rows[currentRow] += c;
+        if (currentRow == 0 || currentRow == numRows - 1) {
+            goingDown = !goingDown;
+        }
+        currentRow += goingDown ? 1 : -1;
+    }
+
+    string result = "";
+    for (const string& row : rows) {
+        result += row;
+    }
+    return result;
+}
+};
