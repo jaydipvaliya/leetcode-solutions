@@ -1,0 +1,28 @@
+// Last updated: 8/19/2026, 1:21:53 PM
+class Solution {
+public:
+    int minimumPairRemoval(vector<int>& nums) {
+        int operations = 0;
+
+        while (!is_sorted(nums.begin(), nums.end())) {
+            int minSum = INT_MAX;
+            int index = 0;
+
+            for (int i = 0; i < nums.size() - 1; i++) {
+                int sum = nums[i] + nums[i + 1];
+
+                if (sum < minSum) {
+                    minSum = sum;
+                    index = i;
+                }
+            }
+
+            nums[index] = nums[index] + nums[index + 1];
+            nums.erase(nums.begin() + index + 1);
+
+            operations++;
+        }
+
+        return operations;
+    }
+};
